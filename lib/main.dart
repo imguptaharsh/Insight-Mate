@@ -1,3 +1,6 @@
+import 'package:hackathon_gpt/Frontend/screen/profile.dart';
+import 'package:hackathon_gpt/Frontend/screen/profile_dummy.dart';
+
 import '../Backend/providers/models_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               color: cardColor,
             )),
-        home: const Chatscreen(),
+        home: myProfile(),
       ),
     );
   }
