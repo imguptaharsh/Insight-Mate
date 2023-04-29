@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:hackathon_gpt/Frontend/screen/SignInScreen.dart';
+import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
 import '../../Backend/auth/auth_services.dart';
@@ -11,22 +11,20 @@ enum Auth {
   signup,
 }
 
-class LoginPage extends StatefulWidget {
+class SignInPage extends StatefulWidget {
   static const String routeName = '/auth-screen';
-  const LoginPage({super.key});
+  const SignInPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignInPageState extends State<SignInPage> {
   bool _rememberMe = false;
   final _formKey = GlobalKey<FormState>();
 
 // ignore: prefer_final_fields
   Auth _auth = Auth.signup;
-  // final _signUpFormKey = GlobalKey<FormState>();
-  // final _signInFormKey = GlobalKey<FormState>();
   final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -83,26 +81,66 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     )),
                 const SizedBox(height: 20.0),
-                const Text(
-                  'Welcome Back',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontFamily: 'Gotham',
-                  ),
+                Row(
+                  children: const [
+                    Text(
+                      'Hello there',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'Gotham',
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Image(
+                      image: AssetImage('assets/images/hand.png'),
+                      width: 50,
+                      height: 60,
+                    )
+                  ],
                 ),
                 const SizedBox(height: 20.0),
                 const Text(
-                  'Please enter your email & password to log In',
+                  'Please enter your email & password to create an account',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 17.0,
                     fontStyle: FontStyle.normal,
                     color: Colors.white,
                     fontFamily: 'Gotham',
                   ),
                 ),
                 const SizedBox(height: 20.0),
+                TextFormField(
+                  controller: _nameController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please Enter UserName";
+                    }
+                    return null;
+                  },
+                  cursorColor: const Color.fromRGBO(0, 166, 126, 100),
+                  decoration: const InputDecoration(
+                    hintText: 'User Name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person_2_rounded,
+                      color: Color.fromRGBO(0, 166, 126, 100),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(2, 190, 146, 0.612)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(0, 166, 126, 100)),
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 18.0),
                 TextFormField(
                   controller: _emailController,
                   validator: (value) {
@@ -163,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
-                const SizedBox(height: 18.0),
+                const SizedBox(height: 10.0),
                 Row(
                   children: [
                     Theme(
@@ -181,36 +219,44 @@ class _LoginPageState extends State<LoginPage> {
                         activeColor: const Color.fromRGBO(0, 166, 126, 100),
                       ),
                     ),
-                    const Text(
-                      'Remember me',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Gotham',
-                      ),
+                    Row(
+                      children: const [
+                        Text(
+                          'I agree to chat AI ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Gotham',
+                          ),
+                        ),
+                        Text(
+                          ' Public Agreement,Terms ',
+                          style: TextStyle(
+                            color: Color.fromRGBO(0, 166, 126, 100),
+                            fontFamily: 'Gotham',
+                          ),
+                        ),
+                      ],
                     ),
                   ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 28),
+                  child: Text(
+                    ' & Privacy Policy.',
+                    style: TextStyle(
+                      color: Color.fromRGBO(0, 166, 126, 100),
+                      fontFamily: 'Gotham',
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20.0),
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot password?',
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 166, 126, 100),
-                            fontSize: 15,
-                            fontFamily: 'Gotham',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
+                      const SizedBox(height: 15),
                       SizedBox(
-                        width: 450,
+                        width: 400,
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {},
@@ -223,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
@@ -238,7 +284,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 28.0),
+                const SizedBox(height: 20.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -251,24 +297,25 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const SignInPage(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 166, 126, 100),
-                            fontSize: 15,
-                            fontFamily: 'Gotham',
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
                           ),
-                        )),
+                        );
+                      },
+                      child: const Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Color.fromRGBO(0, 166, 126, 100),
+                          fontSize: 15,
+                          fontFamily: 'Gotham',
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 28.0),
+                const SizedBox(height: 25.0),
                 Row(
                   children: [
                     Expanded(
@@ -295,7 +342,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 32.0),
+                const SizedBox(height: 30.0),
                 Center(
                   child: SignInButton(
                     padding:
