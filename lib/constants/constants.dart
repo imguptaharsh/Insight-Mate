@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String uri = 'http://0.0.0.0:3000';
+
 Color scaffoldBackgroundColor = const Color(0xFF343541);
 Color cardColor = const Color(0xFF444654);
 
