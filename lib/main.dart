@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_gpt/screen/chat.dart';
 
-void main() => runApp(MyApp());
+import 'Frontend/screen/chat.dart';
+
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Scaffold(),
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Main Screen',
       home: MainPage(),
     );
@@ -24,20 +17,22 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
-        title: Text('Flutter Main Screen'),
+        title: const Text('Flutter Main Screen'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('Go to Second Page'),
+          child: const Text('Go to Second Page'),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Chatscreen()),
+              MaterialPageRoute(builder: (context) => const Chatscreen()),
             );
           },
         ),
