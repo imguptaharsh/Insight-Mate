@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import '../widget/build_Card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -189,6 +190,40 @@ class HomeScreen extends StatelessWidget {
               )
             ],
           ),
-        ));
+        ),
+        bottomNavigationBar: const GNav(tabs: [
+          GButton(
+            icon: Icons.chat,
+            rippleColor: Colors.white10,
+            iconColor: Colors.white,
+            text: ' Chat',
+            textColor: Colors.white,
+            iconActiveColor: Colors.white,
+          ),
+          GButton(
+            rippleColor: Colors.white10,
+            icon: Icons.home,
+            iconColor: Colors.white,
+            text: ' Home',
+            textColor: Colors.white,
+            iconActiveColor: Colors.white,
+          ),
+          GButton(
+            rippleColor: Colors.white10,
+            icon: Icons.history,
+            iconColor: Colors.white,
+            text: ' History',
+            textColor: Colors.white,
+            iconActiveColor: Colors.white,
+          ),
+          GButton(
+            rippleColor: Colors.white10,
+            icon: Icons.person,
+            iconColor: Colors.white,
+            text: ' Profile',
+            textColor: Colors.white,
+            iconActiveColor: Colors.white,
+          ),
+        ]));
   }
 }
