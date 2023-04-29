@@ -4,6 +4,16 @@ import 'package:hackathon_gpt/screen/chat.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Scaffold(),
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
