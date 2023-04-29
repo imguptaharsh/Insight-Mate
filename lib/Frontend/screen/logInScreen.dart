@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
 import '../../Backend/auth/auth_services.dart';
 
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(40, 43, 48, 0),
+      backgroundColor: const Color(0xff20262E),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -68,7 +69,13 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const SizedBox(height: 70.0),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SecondScreen(),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.arrow_back,
                       size: 25,
@@ -87,71 +94,71 @@ class _LoginPageState extends State<LoginPage> {
                 const Text(
                   'Please enter your email & password to log In',
                   style: TextStyle(
-                    fontSize: 20.0,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.normal,
                     color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                Form(
-                  key: _formKey,
-                  child: TextFormField(
-                    controller: _emailController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter email";
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.mail,
-                        color: Color.fromRGBO(0, 166, 126, 100),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(0, 166, 126, 100)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
+                TextFormField(
+                  controller: _emailController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please Enter email";
+                    }
+                    return null;
+                  },
+                  cursorColor: const Color.fromRGBO(0, 166, 126, 100),
+                  decoration: const InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.mail,
+                      color: Color.fromRGBO(0, 166, 126, 100),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(2, 190, 146, 0.612)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(0, 166, 126, 100)),
                     ),
                   ),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 10.0),
-                Form(
-                  key: _formKey,
-                  child: TextFormField(
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Please Enter Password";
-                      }
-                      return null;
-                    },
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock,
-                        color: Color.fromRGBO(0, 166, 126, 100),
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(0, 166, 126, 100)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
+                TextFormField(
+                  controller: _passwordController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Please Enter Password";
+                    }
+                    return null;
+                  },
+                  cursorColor: const Color.fromRGBO(0, 166, 126, 100),
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: Color.fromRGBO(0, 166, 126, 100),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(2, 190, 146, 0.382)),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(0, 166, 126, 100)),
                     ),
                   ),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 10.0),
                 Row(
@@ -242,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Container(
                         height: 1,
-                        color: const Color.fromARGB(255, 121, 121, 121),
+                        color: const Color.fromARGB(255, 209, 206, 206),
                       ),
                     ),
                     const Padding(
@@ -250,14 +257,14 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Or Continue With",
                         style: TextStyle(
-                          color: Color.fromARGB(255, 121, 121, 121),
+                          color: Color.fromARGB(255, 209, 206, 206),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Container(
                         height: 1,
-                        color: const Color.fromARGB(255, 121, 121, 121),
+                        color: const Color.fromARGB(255, 209, 206, 206),
                       ),
                     ),
                   ],
