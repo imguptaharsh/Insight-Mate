@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import '../../Backend/constants/constants.dart';
 import '../../Backend/providers/chats_provider.dart';
@@ -21,6 +22,7 @@ class Chatscreen extends StatefulWidget {
 
 class _ChatscreenState extends State<Chatscreen> {
   bool _isTyping = false;
+  bool _isListening = false;
 
   late TextEditingController textEditingController;
   late ScrollController _listScrollController;
@@ -44,6 +46,9 @@ class _ChatscreenState extends State<Chatscreen> {
   Widget build(BuildContext context) {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
+    final speech = stt.SpeechToText();
+    double _buttonSize = 60;
+    double _borderRadius = 30;
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -109,15 +114,56 @@ class _ChatscreenState extends State<Chatscreen> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () async {
-                          await sendMessageFCT(
-                              modelsProvider: modelsProvider,
-                              chatProvider: chatProvider);
-                        },
-                        icon: const Icon(
-                          Icons.send,
+                      onPressed: () async {
+                        await sendMessageFCT(
+                            modelsProvider: modelsProvider,
+                            chatProvider: chatProvider);
+                      },
+                      icon: const Icon(
+                        Icons.send,
+                        color: Colors.white,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTapUp: (details) {
+                        speech.stop();
+                        setState(() {
+                          _isListening = false;
+                          _buttonSize = 50.0;
+                          _borderRadius = 25.0;
+                        });
+                      },
+                      onTapDown: (details) async {
+                        final isAvailable = await speech.initialize();
+                        if (isAvailable) {
+                          setState(() {
+                            _isListening = true;
+                            _buttonSize = 60.0;
+                            _borderRadius = 30.0;
+                          });
+                          await speech.listen(
+                            onResult: (result) {
+                              textEditingController.text =
+                                  result.recognizedWords;
+                            },
+                          );
+                        }
+                      },
+                      //  child:  Icon(Icons.mic,color: _isListening ? Colors.blue : Colors.white,)
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 150),
+                        width: _buttonSize,
+                        height: _buttonSize,
+                        decoration: BoxDecoration(
                           color: Colors.white,
-                        ))
+                          borderRadius: BorderRadius.circular(_borderRadius),
+                        ),
+                        child: Icon(
+                          _isListening ? Icons.mic : Icons.mic_none_rounded,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

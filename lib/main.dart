@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               color: cardColor,
             )),
-        home: Chatscreen(),
+        home: const Chatscreen(),
       ),
     );
   }

@@ -43,6 +43,9 @@ dependencies:
   flutter_signin_button: ^2.0.0
   whatsapp: ^2.0.0
   whatsapp_share: ^2.0.1
+  text_to_speech: ^0.2.3
+  flutter_tts: ^3.6.3
+  speech_to_text: ^6.1.1
 
 dev_dependencies:
   flutter_test:
