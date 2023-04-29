@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/chat.dart';
+import '../models/chat.dart';
 
 class ChatProvider with ChangeNotifier {
   List<ChatModel> chatList = [];
