@@ -1,41 +1,39 @@
+import '../Backend/providers/models_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'Frontend/screen/chat.dart';
+import 'constants/constants.dart';
+import '../Backend/providers/chats_provider.dart';
+import '../Frontend/screen/chat.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter Main Screen',
-      home: MainPage(),
-    );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Text('Flutter Main Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Go to Second Page'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Chatscreen()),
-            );
-          },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ModelsProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ChatProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter ChatBOT',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: scaffoldBackgroundColor,
+            appBarTheme: AppBarTheme(
+              color: cardColor,
+            )),
+        home: Chatscreen(),
       ),
     );
   }
