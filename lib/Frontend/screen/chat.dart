@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hackathon_gpt/Backend/constants/constants.dart';
-import 'package:hackathon_gpt/Frontend/widget/chat_widget.dart';
+
+import '../constants/constants.dart';
+import '../widget/chat_widget.dart';
 
 class Chatscreen extends StatefulWidget {
   const Chatscreen({super.key});
@@ -15,7 +18,6 @@ class _ChatscreenState extends State<Chatscreen> {
   late TextEditingController textEditingController;
   @override
   void initState() {
-    // ignore: todo
     // TODO: implement initState
     textEditingController = TextEditingController();
     super.initState();
@@ -23,30 +25,28 @@ class _ChatscreenState extends State<Chatscreen> {
 
   @override
   void dispose() {
-    // ignore: todo
     // TODO: implement dispose
     textEditingController.dispose();
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(60, 158, 158, 158),
+          backgroundColor: Color.fromARGB(60, 158, 158, 158),
           elevation: 2,
           leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   ))),
-          title: const Text('CHATGPT'),
+          title: Text('CHATGPT'),
           centerTitle: true,
-          actions: const [],
+          actions: [],
         ),
         body: SafeArea(
           child: Column(children: [
@@ -66,7 +66,7 @@ class _ChatscreenState extends State<Chatscreen> {
                 color: Color.fromARGB(255, 247, 247, 247),
                 size: 18,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               Material(
@@ -82,7 +82,7 @@ class _ChatscreenState extends State<Chatscreen> {
                           ),
                           controller: textEditingController,
                           onSubmitted: (value) {},
-                          decoration: const InputDecoration.collapsed(
+                          decoration: InputDecoration.collapsed(
                               hintText: "How can i help you",
                               hintStyle: TextStyle(
                                   color: Color.fromARGB(255, 247, 245, 245))),
@@ -90,7 +90,7 @@ class _ChatscreenState extends State<Chatscreen> {
                       ),
                       IconButton(
                           onPressed: () {},
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.send,
                             color: Colors.white,
                           ))
