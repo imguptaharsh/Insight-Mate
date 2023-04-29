@@ -1,8 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../../Backend/widgets/text_widget.dart';
 import 'package:whatsapp_share/whatsapp_share.dart';
-
+// import 'package:text_to_speech/text_to_speech.dart';
 import '../../constants/constants.dart';
 
 class MyWidget extends StatefulWidget {
@@ -95,18 +96,32 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
                 widget.chatIndex == 0
                     ? const SizedBox.shrink()
-                    : const Row(
+                    : Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          GestureDetector(
+                            onTap: () async {
+                              FlutterTts flutterTts = FlutterTts();
+                              flutterTts.setLanguage("en-US");
+                              flutterTts.setPitch(1.5);
+                              flutterTts.setSpeechRate(1);
+                              await flutterTts.speak(
+                                widget.msg.toString(),
+                              );
+                            },
+                            child: const Icon(
+                              Icons.mic,
+                            ),
+                          ),
+                          const Icon(
                             Icons.thumb_up_alt_outlined,
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.thumb_down_alt_outlined,
                             color: Colors.white,
                           )
