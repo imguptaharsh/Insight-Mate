@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 
+import '../../Backend/auth/auth_services.dart';
+
+enum Auth {
+  signin,
+  signup,
+}
+
 class LoginPage extends StatefulWidget {
+  static const String routeName = '/auth-screen';
   const LoginPage({super.key});
 
   @override
@@ -12,8 +20,40 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _rememberMe = false;
   final _formKey = GlobalKey<FormState>();
+
+// ignore: prefer_final_fields
+  Auth _auth = Auth.signup;
+  // final _signUpFormKey = GlobalKey<FormState>();
+  // final _signInFormKey = GlobalKey<FormState>();
+  final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+      name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
