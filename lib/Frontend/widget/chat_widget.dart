@@ -99,6 +99,9 @@ class _MyWidgetState extends State<MyWidget> {
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
+
+                        children: const [
+                          Icon(
                         children: [
                           GestureDetector(
                             onTap: () async {

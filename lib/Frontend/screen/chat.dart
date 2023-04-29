@@ -13,6 +13,7 @@ import '../../Backend/widgets/text_widget.dart';
 import '../widget/chat_widget.dart';
 
 class Chatscreen extends StatefulWidget {
+  static const String routeName = '/chat-screen';
   const Chatscreen({super.key});
 
   @override
