@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 import '../../Backend/constants/constants.dart';
 import '../../Backend/providers/chats_provider.dart';
 import '../../Backend/providers/models_provider.dart';
-import '../../Backend/services/assets_manager.dart';
 import '../../Backend/services/services.dart';
 import '../../Backend/widgets/text_widget.dart';
 import '../widget/chat_widget.dart';
 
 class Chatscreen extends StatefulWidget {
+  static const String routeName = '/chat-screen';
   const Chatscreen({super.key});
 
   @override

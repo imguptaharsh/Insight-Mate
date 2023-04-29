@@ -95,10 +95,10 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
                 widget.chatIndex == 0
                     ? const SizedBox.shrink()
-                    : const Row(
+                    : Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.thumb_up_alt_outlined,
                             color: Colors.white,
