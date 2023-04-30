@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
+import '../../Frontend/screen/logInScreen.dart';
+import 'package:hackathon_gpt/Frontend/screen/signInScreen.dart';
 
 class SecondScreen extends StatefulWidget {
+  static const routeName = '/first-screen';
   const SecondScreen({super.key});
 
   @override
@@ -25,11 +27,10 @@ class _SecondScreenState extends State<SecondScreen> {
                 height: 350,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/images/logo.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
-                // Other container properties
               ),
               Center(
                 child: SizedBox(
@@ -58,7 +59,7 @@ class _SecondScreenState extends State<SecondScreen> {
                           ),
                           SizedBox(width: 10),
                           Image(
-                            image: AssetImage('assets/hand.png'),
+                            image: AssetImage('assets/images/hand.png'),
                             width: 80,
                             height: 90,
                           )
@@ -100,7 +101,13 @@ class _SecondScreenState extends State<SecondScreen> {
                 width: 400,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignInPage(),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color.fromRGBO(0, 166, 126, 100)),
