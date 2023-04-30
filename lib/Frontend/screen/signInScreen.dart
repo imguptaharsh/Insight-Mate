@@ -259,7 +259,9 @@ class _SignInPageState extends State<SignInPage> {
                         width: 400,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            signUpUser();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromRGBO(0, 166, 126, 100)),
