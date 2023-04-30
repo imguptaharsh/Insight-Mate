@@ -34,8 +34,6 @@ Future<void> share() async {
 void sendWhatsapp() {
   // ignore: unused_local_variable
   String url = "whatsapp://send?phone=+919650845408&text=${Uri.parse("hello")}";
-  //launchUrl(Uri.parse(url));
-  //launchUrl(Uri.parse(url));
 }
 
 class _MyWidgetState extends State<MyWidget> {
@@ -52,18 +50,12 @@ class _MyWidgetState extends State<MyWidget> {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                    // Image.network(
-
                     widget.chatIndex == 0
                         ? 'https://static.vecteezy.com/system/resources/previews/021/608/790/original/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg'
                         : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmL_db62k8JH_uZuQi3IWja7VdudVSJAf6fIC7bPadex8GmodDpBFO7MLHpquflN_KS0o&usqp=CAU',
-                    // height: 30,
-                    // width: 30,
                   ),
                 ),
-                const SizedBox(
-                  width: 8,
-                ),
+                const SizedBox(width: 8),
                 Expanded(
                   child: widget.chatIndex == 0
                       ? TextWidget(
@@ -112,18 +104,15 @@ class _MyWidgetState extends State<MyWidget> {
                             },
                             child: const Icon(
                               Icons.mic,
+                              color: Color.fromARGB(255, 136, 136, 136),
                             ),
-                          ),
-                          const Icon(
-                            Icons.thumb_up_alt_outlined,
-                            color: Colors.white,
                           ),
                           const SizedBox(
                             width: 5,
                           ),
                           const Icon(
-                            Icons.thumb_down_alt_outlined,
-                            color: Colors.white,
+                            Icons.share,
+                            color: Color.fromARGB(255, 136, 136, 136),
                           )
                         ],
                       ),
