@@ -28,7 +28,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
-        cart: [],
+        // cart: [],
       );
 
       http.Response res = await http.post(
@@ -72,6 +72,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      print("here");
       // print(res.body);
       // ignore: use_build_context_synchronously
       httpErrorHandle(
@@ -83,6 +84,7 @@ class AuthService {
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
           // ignore: use_build_context_synchronously
+          showSnackBar(context, "SIGNIN SUCCESSFUL");
           Navigator.pushNamedAndRemoveUntil(
             context,
             Chatscreen.routeName,
