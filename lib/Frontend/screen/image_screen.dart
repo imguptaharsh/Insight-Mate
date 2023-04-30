@@ -14,6 +14,7 @@ import '../../Backend/providers/images_provider.dart';
 import '../../assets_manager.dart';
 
 class ImageScreen extends StatefulWidget {
+  static const routeName = '/image-screen';
   const ImageScreen({super.key});
 
   @override

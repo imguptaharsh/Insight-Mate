@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat.dart';
 import 'package:hackathon_gpt/Frontend/screen/homescreen.dart';
+import 'package:hackathon_gpt/Frontend/screen/image_screen.dart';
 import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
@@ -25,6 +26,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => SecondScreen(),
+      );
+    case ImageScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ImageScreen(),
       );
     default:
       return MaterialPageRoute(
