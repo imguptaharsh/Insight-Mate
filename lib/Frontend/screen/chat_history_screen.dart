@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ChatHistroyScreen extends StatelessWidget {
+  static const routeName = '/history';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
