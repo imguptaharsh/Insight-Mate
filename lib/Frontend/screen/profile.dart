@@ -38,13 +38,15 @@ class _myProfileState extends State<myProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xff20262E),
       appBar: AppBar(
         leading: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Image.network(
+            child: Image.asset(
               fit: BoxFit.cover,
-              'https://static.vecteezy.com/system/resources/previews/021/608/790/large_2x/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg',
+              'assets/images/logo.png',
+              width: 40,
+              height: 40,
             )),
         title: const Text(
           'AI Assistants',
@@ -55,7 +57,7 @@ class _myProfileState extends State<myProfile> {
               fontSize: 19),
         ),
         centerTitle: true,
-        toolbarHeight: 50,
+        toolbarHeight: 70,
         automaticallyImplyLeading: true,
         elevation: 0,
         backgroundColor: const Color.fromARGB(0, 15, 1, 1),
@@ -65,14 +67,11 @@ class _myProfileState extends State<myProfile> {
           children: [
             Column(
               children: [
-                const SizedBox(
-                  height: 50,
-                ),
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 8, 8, 8),
+                    color: Color(0xff20262E),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -81,43 +80,50 @@ class _myProfileState extends State<myProfile> {
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        //mainAxisAlignment: MainAxisAlignment.start,
+                        //crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            width: 250,
-                            height: 80,
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      "Aryan Kumar",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'Gotham',
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Aryan@gmail.com",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.grey,
-                                        fontFamily: 'Gotham',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Color.fromARGB(255, 59, 255, 85),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    'https://img.freepik.com/free-photo/robot-doing-peace-sign_1048-3527.jpg?w=2000'),
+                                radius: 48,
+                                backgroundColor: Colors.green,
+                              ),
                             ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            children: const [
+                              Text(
+                                "Aryan Kumar",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Gotham',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Aryan@gmail.com",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey,
+                                  fontFamily: 'Gotham',
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -148,10 +154,6 @@ class _myProfileState extends State<myProfile> {
                           icon: Icons.security,
                           title: "Security",
                           onTab1: () {}),
-                      listTile(
-                          icon: Icons.language_outlined,
-                          title: "Languages",
-                          onTab1: () {}),
                     ],
                   ),
                 ),
@@ -174,7 +176,7 @@ class _myProfileState extends State<myProfile> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 7, 6, 6),
+                    color: Color(0xff20262E),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -216,7 +218,142 @@ class _myProfileState extends State<myProfile> {
                       listTile(
                           icon: Icons.exit_to_app_outlined,
                           title: "LogOut",
-                          onTab1: () {}),
+                          onTab1: () {
+                            showModalBottomSheet<void>(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 36, 43, 52),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return SizedBox(
+                                  height: 250,
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.0, vertical: 20),
+                                          child: Text(
+                                            'Logout',
+                                            style: TextStyle(
+                                                fontFamily: 'Gotham',
+                                                color: Colors.red,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          indent: 20,
+                                          thickness: 1,
+                                          color: Colors.white12,
+                                          endIndent: 20,
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.all(25.0),
+                                          child: Text(
+                                            'Are You Sure you want to log out ?',
+                                            style: TextStyle(
+                                                fontFamily: 'Gotham',
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            SizedBox(
+                                              width: 150,
+                                              height: 50,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {});
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const myProfile()),
+                                                  );
+                                                },
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          const Color.fromRGBO(
+                                                              0,
+                                                              166,
+                                                              126,
+                                                              100)),
+                                                  foregroundColor:
+                                                      MaterialStateProperty.all<
+                                                          Color>(Colors.white),
+                                                  elevation:
+                                                      MaterialStateProperty.all<
+                                                          double>(0.0),
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              45.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                // style: ElevatedButton.styleFrom(
+                                                //   primary: _buttonColor,
+                                                // ),
+                                                child: const Text('Cancel'),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 150,
+                                              height: 50,
+                                              child: ElevatedButton(
+                                                onPressed: () {},
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all<
+                                                              Color>(
+                                                          const Color.fromRGBO(
+                                                              0,
+                                                              166,
+                                                              126,
+                                                              100)),
+                                                  foregroundColor:
+                                                      MaterialStateProperty.all<
+                                                          Color>(Colors.white),
+                                                  elevation:
+                                                      MaterialStateProperty.all<
+                                                          double>(0.0),
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              45.0),
+                                                    ),
+                                                  ),
+                                                ),
+                                                child:
+                                                    const Text('Yes, Logout'),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }),
 
                       //  listTile(icon: Icons.shop, title: "My orders"),
                     ],
@@ -224,19 +361,6 @@ class _myProfileState extends State<myProfile> {
                 )
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 40, left: 30),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Color.fromARGB(255, 59, 255, 85),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://img.freepik.com/free-photo/robot-doing-peace-sign_1048-3527.jpg?w=2000'),
-                  radius: 45,
-                  backgroundColor: Colors.green,
-                ),
-              ),
-            )
           ],
         ),
       ),
