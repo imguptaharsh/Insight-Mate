@@ -76,6 +76,9 @@ class _PersonalInfoState extends State<PersonalInfo> {
                               child: GestureDetector(
                                 onTap: () {
                                   showModalBottomSheet(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
                                       context: context,
                                       builder: ((builder) =>
                                           BottomShhetWidget()));
