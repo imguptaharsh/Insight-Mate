@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:hackathon_gpt/Frontend/screen/SignInScreen.dart';
-import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
+import '../../Frontend/screen/logInScreen.dart';
+import 'package:hackathon_gpt/Frontend/screen/signInScreen.dart';
 
 class SecondScreen extends StatefulWidget {
+  static const routeName = '/first-screen';
   const SecondScreen({super.key});
 
   @override
