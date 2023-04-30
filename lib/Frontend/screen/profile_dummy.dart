@@ -1,26 +1,17 @@
-// import 'dart:js_util';
-// import 'dart:js_util';s
-
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../widget/bottom_nav.dart';
-//import 'package:foodapp/screens/home/drawer_side.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-//import 'dart:ui';
 
-// ignore: camel_case_types
-class myProfile extends StatefulWidget {
-  const myProfile({super.key});
+class ProfileDummy extends StatefulWidget {
+  const ProfileDummy({super.key});
 
   @override
-  State<myProfile> createState() => _myProfileState();
+  State<ProfileDummy> createState() => _ProfileDummyState();
 }
 
-// ignore: camel_case_types
-class _myProfileState extends State<myProfile> {
-  // const myProfile({super.key});
+class _ProfileDummyState extends State<ProfileDummy> {
   Widget listTile(
       {required IconData icon, required String title, required onTab1}) {
     return Column(
@@ -47,7 +38,7 @@ class _myProfileState extends State<myProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 18, 7, 7),
       appBar: AppBar(
         leading: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -73,10 +64,6 @@ class _myProfileState extends State<myProfile> {
         children: [
           Column(
             children: [
-              // Text(
-              //   "CHATGPT",
-              //   style: TextStyle(color: Colors.white, fontSize: 50),
-              // ),
               const SizedBox(
                 height: 50,
               ),
@@ -185,37 +172,6 @@ class _myProfileState extends State<myProfile> {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              //   child: Row(
-              //     children: <Widget>[
-              //       Expanded(
-              //         child: Divider(
-              //           color: Colors.white,
-              //           height: 36,
-              //           thickness: 0.2,
-              //         ),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsets.symmetric(horizontal: 8),
-              //         child: Text(
-              //           'About',
-              //           style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: 14,
-              //           ),
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: Divider(
-              //           color: Color.fromARGB(255, 211, 211, 211),
-              //           height: 36,
-              //           thickness: 0.2,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               const ListTile(
                 leading: Text(
                   ' About',
@@ -232,7 +188,7 @@ class _myProfileState extends State<myProfile> {
                 ),
               ),
               Container(
-                height: 260,
+                height: 300,
                 width: double.infinity,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -286,7 +242,7 @@ class _myProfileState extends State<myProfile> {
                     //  listTile(icon: Icons.shop, title: "My orders"),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           const Padding(
@@ -301,35 +257,10 @@ class _myProfileState extends State<myProfile> {
                 backgroundColor: Colors.green,
               ),
             ),
-          )
+          ),
         ],
       ),
-      bottomNavigationBar: const GNav(tabs: [
-        GButton(
-          icon: Icons.chat,
-          iconColor: Colors.white,
-          text: 'Chat',
-          textColor: Colors.white,
-        ),
-        GButton(
-          icon: Icons.home,
-          iconColor: Colors.white,
-          text: 'Home',
-          textColor: Colors.white,
-        ),
-        GButton(
-          icon: Icons.history,
-          iconColor: Colors.white,
-          text: 'History',
-          textColor: Colors.white,
-        ),
-        GButton(
-          icon: Icons.person,
-          iconColor: Colors.white,
-          text: 'Setting',
-          textColor: Colors.white,
-        ),
-      ]),
+      bottomNavigationBar: const BottomNav(),
     );
   }
 }
