@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
-import 'package:hackathon_gpt/Frontend/screen/SignInScreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
 import '../../Backend/auth/auth_services.dart';
+import 'signInScreen.dart';
 
 enum Auth {
   signin,
@@ -49,7 +49,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void signInUser() {
+  void signInUser(BuildContext context) {
+    print("reached");
     authService.signInUser(
       context: context,
       email: _emailController.text,
@@ -213,7 +214,9 @@ class _LoginPageState extends State<LoginPage> {
                         width: 450,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            signInUser(context);
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color.fromRGBO(0, 166, 126, 100)),
@@ -228,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           child: const Text(
-                            'Log In',
+                            'Log-In',
                             style: TextStyle(
                               fontFamily: 'Gotham',
                             ),
