@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../services/services.dart';
+
 class ImageLens extends StatefulWidget {
   static const routeName = '/image-lens';
   const ImageLens({super.key});
@@ -20,108 +22,135 @@ class _ImageLensState extends State<ImageLens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff20262E),
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Text Recognition example"),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
+        title: const Text(
+          'Text Detector',
+          style: TextStyle(
+              fontFamily: 'Gotham',
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 19),
+        ),
+        toolbarHeight: 70,
+        automaticallyImplyLeading: true,
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await Services.showModalSheet(context: context);
+            },
+            icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
+          ),
+        ],
       ),
       body: Center(
           child: SingleChildScrollView(
-        child: Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (textScanning) const CircularProgressIndicator(),
-                if (!textScanning && imageFile == null)
-                  // Container(
-                  //   width: 300,
-                  //   height: 300,
-                  //   color: Colors.grey[300]!,
-                  // ),
-                  if (imageFile != null) Image.file(File(imageFile!.path)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.only(top: 10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.grey,
-                            backgroundColor: Colors.white,
-                            shadowColor: Colors.grey[400],
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
+              child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (textScanning) const CircularProgressIndicator(),
+          if (!textScanning && imageFile == null)
+            if (imageFile != null) Image.file(File(imageFile!.path)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                  height: 80,
+                  width: 130,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.grey,
+                      backgroundColor: const Color.fromARGB(185, 40, 42, 39),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                    ),
+                    onPressed: () {
+                      getImage(ImageSource.gallery);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(
+                            Icons.image,
+                            size: 30,
                           ),
-                          onPressed: () {
-                            getImage(ImageSource.gallery);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.image,
-                                  size: 30,
-                                ),
-                                Text(
-                                  "Gallery",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.grey[600]),
-                                )
-                              ],
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Gallery",
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.white),
                             ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+              Container(
+                  height: 80,
+                  width: 130,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.grey,
+                      backgroundColor: const Color.fromARGB(185, 40, 42, 39),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                    ),
+                    onPressed: () {
+                      getImage(ImageSource.camera);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(
+                            Icons.camera_alt,
+                            size: 30,
                           ),
-                        )),
-                    Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.only(top: 10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.grey,
-                            backgroundColor: Colors.white,
-                            shadowColor: Colors.grey[400],
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                          ),
-                          onPressed: () {
-                            getImage(ImageSource.camera);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.camera_alt,
-                                  size: 30,
-                                ),
-                                Text(
-                                  "Camera",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.grey[600]),
-                                )
-                              ],
+                          Padding(
+                            padding: EdgeInsets.all(6.0),
+                            child: Text(
+                              "Camera",
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.white),
                             ),
-                          ),
-                        )),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  scannedText,
-                  style: const TextStyle(fontSize: 20),
-                )
-              ],
-            )),
-      )),
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Text(
+              scannedText,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Gotham',
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500),
+            ),
+          )
+        ],
+      ))),
     );
   }
 
@@ -137,7 +166,11 @@ class _ImageLensState extends State<ImageLens> {
     } catch (e) {
       textScanning = false;
       imageFile = null;
-      scannedText = "Error occured while scanning";
+      scannedText = const Text(
+        'Error occured while scanning',
+        style: TextStyle(color: Colors.redAccent),
+      ) as String;
+
       setState(() {});
     }
   }
@@ -164,24 +197,3 @@ class _ImageLensState extends State<ImageLens> {
     super.initState();
   }
 }
-
-// Widget chooseImageFromCamera() {
-//   return Padding(
-//     padding: const EdgeInsets.only(top: 8, bottom: 8),
-//     child: Container(
-//       height: 55,
-//       decoration: BoxDecoration(
-//         color: Colors.yellow,
-//         borderRadius: BorderRadius.circular(
-//           24,
-//         ),
-//       ),
-//       child: Center(
-//         child: Text(
-//           Constants.chooseImgFromCameraString,
-//           style: TextStyle(color: Colors.black),
-//         ),
-//       ),
-//     ),
-//   );
-// }

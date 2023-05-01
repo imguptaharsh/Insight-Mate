@@ -53,10 +53,10 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, ImageScreen.routeName);
               },
               child: buildCard(
-                image: Image.asset('assets/images/article.png'),
-                heading: 'Write an Articles',
+                image: Image.asset('assets/images/imageD.png'),
+                heading: 'Click to Generate an Image',
                 textBody:
-                    'Generate well-written\narticles on any\ntopic you want.',
+                    'An AI tool to Generate images\nof any object you want.',
               ),
             ),
             const SizedBox(
@@ -81,10 +81,9 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, ImageLens.routeName);
               },
               child: buildCard(
-                image: Image.asset('assets/images/article.png'),
-                heading: 'Write an Articles',
-                textBody:
-                    'Generate well-written\narticles on any\ntopic you want.',
+                image: Image.asset('assets/images/text.png'),
+                heading: 'Click to Detect any Text',
+                textBody: 'An AI tool to Detect your\ndesired Text.',
               ),
             ),
             const SizedBox(
@@ -109,34 +108,11 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, EdgeScreen.routeName);
               },
               child: buildCard(
-                image: Image.asset('assets/images/article.png'),
-                heading: 'Write an Articles',
+                image: Image.asset('assets/images/edge.png'),
+                heading: 'Click to Detect the Edges',
                 textBody:
-                    'Generate well-written\narticles on any\ntopic you want.',
+                    'An AI tool to Detect the \nsharp Edges of any Object.',
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
             ),
             const SizedBox(
               height: 12,
