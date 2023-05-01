@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_gpt/Backend/edge_detection/edgescreen.dart';
 import 'package:hackathon_gpt/Backend/image_text/lens.dart';
+import 'package:hackathon_gpt/Frontend/screen/bottom_bar.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat_history_screen.dart';
 import 'package:hackathon_gpt/Frontend/screen/chatscreen.dart';
@@ -13,6 +14,11 @@ import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
+    case BottomBar.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const BottomBar(),
+      );
     case LoginPage.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

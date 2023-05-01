@@ -6,6 +6,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../services/services.dart';
+
 class EdgeScreen extends StatefulWidget {
   static const routeName = '/edge-screen';
   const EdgeScreen({super.key});
@@ -63,30 +65,58 @@ class _EdgeScreenState extends State<EdgeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff20262E),
       appBar: AppBar(
-        title: const Text('Plugin example app'),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
+        title: const Text(
+          'Edge Detector',
+          style: TextStyle(
+              fontFamily: 'Gotham',
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 19),
+        ),
+        toolbarHeight: 70,
+        automaticallyImplyLeading: true,
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await Services.showModalSheet(context: context);
+            },
+            icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 20),
             Center(
-              child: ElevatedButton(
-                onPressed: getImage,
-                child: Text('Scan'),
+              child: Container(
+                height: 60,
+                width: 110,
+                child: ElevatedButton(
+                  style: const ButtonStyle(
+                      elevation: MaterialStatePropertyAll(5),
+                      backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(255, 58, 60, 60))),
+                  onPressed: getImage,
+                  child: const Text(
+                    'Scan',
+                    style: TextStyle(fontSize: 18, fontFamily: 'Gotham'),
+                  ),
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            Text('Cropped image path:'),
-            Padding(
-              padding: const EdgeInsets.only(top: 0, left: 0, right: 0),
-              child: Text(
-                _imagePath.toString(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
+            const SizedBox(height: 20),
             Visibility(
               visible: _imagePath != null,
               child: Padding(

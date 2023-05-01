@@ -50,13 +50,25 @@ class _ImageScreenState extends State<ImageScreen> {
     // final chatProvider = Provider.of<ChatProvider>(context);
     final imagesProvider = Provider.of<ImagesProvider>(context);
     return Scaffold(
+      backgroundColor: const Color(0xff20262E),
       appBar: AppBar(
-        elevation: 2,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(AssetsManager.openaiLogo),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back)),
+        title: const Text(
+          'Image Generator',
+          style: TextStyle(
+              fontFamily: 'Gotham',
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 19),
         ),
-        title: const Text("ChatGPT"),
+        toolbarHeight: 70,
+        automaticallyImplyLeading: true,
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         actions: [
           IconButton(
             onPressed: () async {
@@ -95,38 +107,42 @@ class _ImageScreenState extends State<ImageScreen> {
             const SizedBox(
               height: 15,
             ),
-            Material(
-              color: cardColor,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        focusNode: focusNode,
-                        style: const TextStyle(color: Colors.white),
-                        controller: textEditingController,
-                        onSubmitted: (value) async {
-                          await sendPrompt(
-                            imagesProvider: imagesProvider,
-                          );
-                        },
-                        decoration: const InputDecoration.collapsed(
-                            hintText: "How can I help you",
-                            hintStyle: TextStyle(color: Colors.grey)),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(20),
+                color: cardColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          focusNode: focusNode,
+                          style: const TextStyle(color: Colors.white),
+                          controller: textEditingController,
+                          onSubmitted: (value) async {
+                            await sendPrompt(
+                              imagesProvider: imagesProvider,
+                            );
+                          },
+                          decoration: const InputDecoration.collapsed(
+                              hintText: "Write something to Generate Image..",
+                              hintStyle: TextStyle(color: Colors.grey)),
+                        ),
                       ),
-                    ),
-                    IconButton(
-                        onPressed: () async {
-                          await sendPrompt(
-                            imagesProvider: imagesProvider,
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.send,
-                          color: Colors.white,
-                        ))
-                  ],
+                      IconButton(
+                          onPressed: () async {
+                            await sendPrompt(
+                              imagesProvider: imagesProvider,
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.send,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
