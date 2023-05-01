@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_gpt/Backend/edge_detection/edgescreen.dart';
+import 'package:hackathon_gpt/Backend/image_text/lens.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat_history_screen.dart';
 import 'package:hackathon_gpt/Frontend/screen/chatscreen.dart';
@@ -55,6 +57,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => PersonalInfo(),
+      );
+    case ImageLens.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ImageLens(),
+      );
+    case EdgeScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => EdgeScreen(),
       );
     default:
       return MaterialPageRoute(

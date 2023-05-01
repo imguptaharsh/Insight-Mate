@@ -12,7 +12,7 @@ class _FrontScreenState extends State<FrontScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const SecondScreen(),

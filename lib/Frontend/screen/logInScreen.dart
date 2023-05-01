@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 70.0),
+                const SizedBox(height: 10.0),
                 IconButton(
                     onPressed: () {
                       Navigator.of(context).push(
