@@ -1,9 +1,11 @@
+import 'package:hackathon_gpt/Frontend/screen/homescreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/secondScren.dart';
 
 import '../Backend/providers/models_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Backend/providers/images_provider.dart';
 import 'Backend/providers/user_provider.dart';
 import 'constants/constants.dart';
 import '../Backend/providers/chats_provider.dart';
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ImagesProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter ChatBOT',
@@ -40,7 +45,7 @@ class MyApp extends StatelessWidget {
               color: cardColor,
             )),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: SecondScreen(),
+        home: HomeScreen(),
       ),
     );
   }
