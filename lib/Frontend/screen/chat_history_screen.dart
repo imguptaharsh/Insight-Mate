@@ -66,12 +66,13 @@ class ChatHistroyScreen extends StatelessWidget {
                   'Notification Message $index', // replace with actual notification message
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
-                trailing: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.grey,
-                    )),
+                // trailing: IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.arrow_forward_ios_rounded,
+                //     color: Colors.grey,
+                //   ),
+                // ),
                 onTap: () {
                   // TODO: Implement notification tap logic
                 },
