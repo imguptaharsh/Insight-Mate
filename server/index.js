@@ -1,11 +1,12 @@
 const express= require('express');
 const mongoose = require("mongoose");
-const authRouter = require("./routes/auth.js");
 
 
 // init type
 const db="mongodb+srv://chatbotgpt:gptbot@cluster0.i8vr6tx.mongodb.net/?retryWrites=true&w=majority";
 
+const authRouter = require("./routes/auth.js");
+const userRouter = require('./routes/user.js');
 
 //INIT
 const PORT = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ const app = express();
 // Client -> middlware -> Server -> Client
 app.use(express.json());
 app.use(authRouter);
+
 
 // Connections
 mongoose

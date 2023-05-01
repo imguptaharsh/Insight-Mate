@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_gpt/Backend/edge_detection/edgescreen.dart';
+import 'package:hackathon_gpt/Backend/image_text/lens.dart';
+import 'package:hackathon_gpt/Frontend/screen/image_screen.dart';
 import '../widget/build_Card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,7 +38,92 @@ class HomeScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Writing',
+                  'Image Generator',
+                  style: TextStyle(
+                      fontFamily: 'Gotham',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 19),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onDoubleTap: null,
+              onTap: () {
+                Navigator.pushNamed(context, ImageScreen.routeName);
+              },
+              child: buildCard(
+                image: Image.asset('assets/images/article.png'),
+                heading: 'Write an Articles',
+                textBody:
+                    'Generate well-written\narticles on any\ntopic you want.',
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Text Detector',
+                  style: TextStyle(
+                      fontFamily: 'Gotham',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 19),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, ImageLens.routeName);
+              },
+              child: buildCard(
+                image: Image.asset('assets/images/article.png'),
+                heading: 'Write an Articles',
+                textBody:
+                    'Generate well-written\narticles on any\ntopic you want.',
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Edge Detector',
+                  style: TextStyle(
+                      fontFamily: 'Gotham',
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 19),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, EdgeScreen.routeName);
+              },
+              child: buildCard(
+                image: Image.asset('assets/images/article.png'),
+                heading: 'Write an Articles',
+                textBody:
+                    'Generate well-written\narticles on any\ntopic you want.',
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '',
                   style: TextStyle(
                       fontFamily: 'Gotham',
                       color: Colors.white,
@@ -53,141 +141,6 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Creative',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Business',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Social Media',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Developer',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Personal',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Others',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19),
-                ),
-              ),
-            ),
-            buildCard(
-              image: Image.asset('assets/images/article.png'),
-              heading: 'Write an Articles',
-              textBody:
-                  'Generate well-written\narticles on any\ntopic you want.',
-            )
           ],
         ),
       ),

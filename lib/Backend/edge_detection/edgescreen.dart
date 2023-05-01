@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class EdgeScreen extends StatefulWidget {
+  static const routeName = '/edge-screen';
   const EdgeScreen({super.key});
 
   @override
