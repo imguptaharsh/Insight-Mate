@@ -29,7 +29,7 @@ class _FrontScreenState extends State<FrontScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/logo.png',
+            'assets/images/logo.png',
             height: 250,
             width: 500,
           ),

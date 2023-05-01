@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hackathon_gpt/Frontend/screen/bottom_bar.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,7 +90,7 @@ class AuthService {
           showSnackBar(context, "SIGNIN SUCCESSFUL");
           Navigator.pushNamedAndRemoveUntil(
             context,
-            Chatscreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },
