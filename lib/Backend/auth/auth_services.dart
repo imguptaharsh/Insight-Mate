@@ -96,4 +96,30 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+
+  void changeCredentials(
+      {required String name,
+      required email,
+      required BuildContext context}) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
+      http.Response res = await http.post(
+          Uri.parse('$uri/api/change/credentials'),
+          body: jsonEncode({'name': name, 'email': email}),
+          headers: <String, String>{
+            'Content-Type': 'application/json; chatset=UTF-8',
+            'x-auth-token': token!
+          });
+
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () async {
+            showSnackBar(context, 'Successfully Changed Crendentials');
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }
