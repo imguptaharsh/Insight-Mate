@@ -70,18 +70,18 @@ class _ChatscreenState extends State<Chatscreen> {
           children: [
             Flexible(
               child: ListView.builder(
-                  controller: _listScrollController,
-                  itemCount: chatProvider.getChatList.length, //chatList.length,
-                  itemBuilder: (context, index) {
-                    return MyWidget(
-                      msg: chatProvider
-                          .getChatList[index].msg, // chatList[index].msg,
-                      chatIndex: chatProvider.getChatList[index]
-                          .chatIndex, //chatList[index].chatIndex,
-                      shouldAnimate:
-                          chatProvider.getChatList.length - 1 == index,
-                    );
-                  }),
+                controller: _listScrollController,
+                itemCount: chatProvider.getChatList.length, //chatList.length,
+                itemBuilder: (context, index) {
+                  return MyWidget(
+                    msg: chatProvider
+                        .getChatList[index].msg, // chatList[index].msg,
+                    chatIndex: chatProvider.getChatList[index]
+                        .chatIndex, //chatList[index].chatIndex,
+                    shouldAnimate: chatProvider.getChatList.length - 1 == index,
+                  );
+                },
+              ),
             ),
             if (_isTyping) ...[
               const SpinKitThreeBounce(

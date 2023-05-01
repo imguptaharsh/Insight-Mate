@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat.dart';
 import 'package:hackathon_gpt/Frontend/screen/chat_history_screen.dart';
+import 'package:hackathon_gpt/Frontend/screen/chatscreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/homescreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/image_screen.dart';
 import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
@@ -23,6 +24,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => Chatscreen(),
+      );
+    case Chatscreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => ChatScreenn(),
       );
     case SecondScreen.routeName:
       return MaterialPageRoute(

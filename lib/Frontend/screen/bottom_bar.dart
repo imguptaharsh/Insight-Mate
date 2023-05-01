@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hackathon_gpt/Frontend/screen/chatscreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/profile.dart';
 
 import 'chat.dart';
@@ -22,7 +23,7 @@ class _BottomBarState extends State<BottomBar> {
   //Screens
   List<Widget> pages = [
     HomeScreen(),
-    Chatscreen(),
+    ChatScreenn(),
     ChatHistroyScreen(),
     myProfile(),
   ];

@@ -1,56 +1,53 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:provider/provider.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import '../../Backend/providers/chats_provider.dart';
+import '../../Backend/providers/models_provider.dart';
+import '../../Backend/widgets/text_widget.dart';
 import '../widget/chat_widget.dart';
 
 class ChatScreenn extends StatefulWidget {
+  static const routeName = '/chat-screnn';
   @override
   _ChatScreennState createState() => _ChatScreennState();
 }
 
 class _ChatScreennState extends State<ChatScreenn> {
-  final TextEditingController _textController = TextEditingController();
-  List<ChatMessage> _messages = [];
+  bool _isTyping = false;
+  bool _isListening = false;
 
-  // void _handleSubmitted(String text) {
-  //   _textController.clear();
-  //   ChatMessage message = ChatMessage(
-  //     text: text,
-  //     isUser: true,
-  //   );
-  //   setState(() {
-  //     _messages.insert(0, message);
-  //   });
-  //   _getReply(text);
-  // }
-
-  void _handleSubmitted(String text) {
-    if (text.isEmpty) {
-      return;
-    }
-    _textController.clear();
-    ChatMessage message = ChatMessage(
-      text: text,
-      isUser: true,
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
-    _getReply(text);
+  late TextEditingController textEditingController;
+  late ScrollController _listScrollController;
+  late FocusNode focusNode;
+  @override
+  void initState() {
+    _listScrollController = ScrollController();
+    textEditingController = TextEditingController();
+    focusNode = FocusNode();
+    super.initState();
   }
 
-  void _getReply(String text) {
-    // logic to get reply from AI or chatbot
-    ChatMessage message = ChatMessage(
-      text: 'This is a reply from AI ',
-      isUser: false,
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
+  @override
+  void dispose() {
+    _listScrollController.dispose();
+    textEditingController.dispose();
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final modelsProvider = Provider.of<ModelsProvider>(context);
+    final chatProvider = Provider.of<ChatProvider>(context);
+    final speech = stt.SpeechToText();
+    double _buttonSize = 60;
+    double _borderRadius = 30;
     return Scaffold(
       backgroundColor: const Color(0xff20262E),
       appBar: AppBar(
@@ -64,24 +61,41 @@ class _ChatScreennState extends State<ChatScreenn> {
         centerTitle: true,
         backgroundColor: const Color(0xff20262E),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Add the code to navigate back to the previous screen
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     // Add the code to navigate back to the previous screen
+
+        //   },
+        // ),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
+            Flexible(
               child: ListView.builder(
-                padding: const EdgeInsets.all(5.0),
-                reverse: true,
-                itemCount: _messages.length,
-                itemBuilder: (_, int index) => _messages[index],
-              ),
+                  padding: const EdgeInsets.all(5.0),
+                  controller: _listScrollController,
+                  // reverse: true,
+                  itemCount: chatProvider.getChatList.length, //chatList.length,
+
+                  itemBuilder: (context, index) {
+                    return ChatMessage(
+                      text: chatProvider
+                          .getChatList[index].msg, // chatList[index].msg,
+                      chatIndex: chatProvider.getChatList[index]
+                          .chatIndex, //chatList[index].chatIndex,
+                      // shouldAnimate:
+                      //     chatProvider.getChatList.length - 1 == index,
+                    );
+                  }),
             ),
+            if (_isTyping) ...[
+              const SpinKitThreeBounce(
+                color: Colors.white,
+                size: 18,
+              ),
+            ],
             const Divider(height: 1.0),
             Padding(
               padding: const EdgeInsets.all(22.0),
@@ -89,18 +103,59 @@ class _ChatScreennState extends State<ChatScreenn> {
                 //height: 90,
                 child: Row(
                   children: [
+                    //MIC STT
                     CircleAvatar(
                       backgroundColor: const Color(0xff17CE92),
                       radius: 25,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.mic,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          // logic for mic button
+                      child: GestureDetector(
+                        onTapUp: (details) {
+                          speech.stop();
+                          setState(() {
+                            _isListening = false;
+                            _buttonSize = 50.0;
+                            _borderRadius = 25.0;
+                          });
                         },
+                        onTapDown: (details) async {
+                          final isAvailable = await speech.initialize();
+                          if (isAvailable) {
+                            setState(() {
+                              _isListening = true;
+                              _buttonSize = 60.0;
+                              _borderRadius = 30.0;
+                            });
+                            await speech.listen(
+                              onResult: (result) {
+                                textEditingController.text =
+                                    result.recognizedWords;
+                              },
+                            );
+                          }
+                        },
+                        //  child:  Icon(Icons.mic,color: _isListening ? Colors.blue : Colors.white,)
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 150),
+                          width: _buttonSize,
+                          height: _buttonSize,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff17CE92),
+                            borderRadius: BorderRadius.circular(_borderRadius),
+                          ),
+                          child: Icon(
+                            _isListening ? Icons.mic : Icons.mic_none_rounded,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
+                      // child: IconButton(
+                      //   icon: const Icon(
+                      //     Icons.mic,
+                      //     color: Colors.white,
+                      //   ),
+                      //   onPressed: () {
+                      //     // logic for mic button
+                      //   },
+                      // ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -118,10 +173,14 @@ class _ChatScreennState extends State<ChatScreenn> {
                                 padding: const EdgeInsets.only(
                                     left: 20.0, right: 30, top: 10, bottom: 10),
                                 child: TextField(
-                                  controller: _textController,
-                                  onSubmitted: _handleSubmitted,
+                                  controller: textEditingController,
+                                  onSubmitted: (value) async {
+                                    await sendMessageFCT(
+                                        modelsProvider: modelsProvider,
+                                        chatProvider: chatProvider);
+                                  },
                                   decoration: const InputDecoration.collapsed(
-                                    hintText: 'Ask me anything...',
+                                    hintText: 'How can I help you',
                                     hintStyle: TextStyle(
                                       color: Color.fromARGB(255, 167, 166, 166),
                                       fontFamily: 'Gotham',
@@ -145,7 +204,11 @@ class _ChatScreennState extends State<ChatScreenn> {
                       radius: 25,
                       child: IconButton(
                         icon: const Icon(Icons.send),
-                        onPressed: () => _handleSubmitted(_textController.text),
+                        onPressed: () async {
+                          await sendMessageFCT(
+                              modelsProvider: modelsProvider,
+                              chatProvider: chatProvider);
+                        },
                         color: Colors.white,
                       ),
                     ),
@@ -159,13 +222,76 @@ class _ChatScreennState extends State<ChatScreenn> {
       ),
     );
   }
+
+  void scrollListToEND() {
+    _listScrollController.animateTo(
+        _listScrollController.position.maxScrollExtent,
+        duration: const Duration(seconds: 2),
+        curve: Curves.easeOut);
+  }
+
+  Future<void> sendMessageFCT(
+      {required ModelsProvider modelsProvider,
+      required ChatProvider chatProvider}) async {
+    if (_isTyping) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: TextWidget(
+            label: "You cant send multiple messages at a time",
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    if (textEditingController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: TextWidget(
+            label: "Please type a message",
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    try {
+      String msg = textEditingController.text;
+      setState(() {
+        _isTyping = true;
+        chatProvider.addUserMessage(msg: msg);
+        textEditingController.clear();
+        focusNode.unfocus();
+      });
+      await chatProvider.sendMessageAndGetAnswers(
+          msg: msg, chosenModelId: modelsProvider.getCurrentModel);
+
+      setState(() {});
+    } catch (error) {
+      log("error $error");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: TextWidget(
+          label: error.toString(),
+        ),
+        backgroundColor: Colors.red,
+      ));
+    } finally {
+      setState(() {
+        scrollListToEND();
+        _isTyping = false;
+      });
+    }
+  }
 }
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({required this.text, required this.isUser});
+  ChatMessage({
+    required this.text,
+    required this.chatIndex,
+  });
 
   final String text;
-  final bool isUser;
+  final int chatIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -173,13 +299,14 @@ class ChatMessage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15),
       child: Row(
         mainAxisAlignment:
-            isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+            (chatIndex == 0) ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           const SizedBox(width: 10.0),
           Column(
-            crossAxisAlignment:
-                isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: (chatIndex == 0)
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
@@ -187,12 +314,14 @@ class ChatMessage extends StatelessWidget {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.65,
                       decoration: BoxDecoration(
-                        color: isUser
+                        color: (chatIndex == 0)
                             ? const Color(0xff17CE92)
                             : const Color(0xff35383F),
                         borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(isUser ? 15.0 : 0),
-                          bottomRight: Radius.circular(isUser ? 0 : 15.0),
+                          bottomLeft:
+                              Radius.circular((chatIndex == 0) ? 15.0 : 0),
+                          bottomRight:
+                              Radius.circular((chatIndex == 0) ? 0 : 15.0),
                           topLeft: const Radius.circular(15.0),
                           topRight: const Radius.circular(15.0),
                         ),
@@ -207,7 +336,8 @@ class ChatMessage extends StatelessWidget {
                         child: Text(
                           text,
                           style: TextStyle(
-                            color: isUser ? Colors.white : Colors.white,
+                            color:
+                                (chatIndex == 0) ? Colors.white : Colors.white,
                             fontSize: 16.0,
                             fontFamily: 'Gotham',
                           ),
@@ -221,7 +351,7 @@ class ChatMessage extends StatelessWidget {
                   Column(
                     children: [
                       Visibility(
-                        visible: !isUser,
+                        visible: !(chatIndex == 0),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(70),
                           onTap: () {
@@ -238,10 +368,18 @@ class ChatMessage extends StatelessWidget {
                         height: 15,
                       ),
                       Visibility(
-                        visible: !isUser,
+                        visible: !(chatIndex == 0),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(70),
-                          onTap: () {},
+                          onTap: () async {
+                            FlutterTts flutterTts = FlutterTts();
+                            flutterTts.setLanguage("en-US");
+                            flutterTts.setPitch(1.0);
+                            flutterTts.setSpeechRate(0.5);
+                            await flutterTts.speak(
+                              text.toString(),
+                            );
+                          },
                           child: const Icon(
                             Icons.mic,
                             color: Color.fromARGB(117, 255, 255, 255),
