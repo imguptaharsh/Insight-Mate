@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:google_nav_bar/google_nav_bar.dart';
-// import 'package:hackathon_gpt/Frontend/screen/chat.dart';
-// import 'package:hackathon_gpt/Frontend/screen/chat_history_screen.dart';
-// import 'package:hackathon_gpt/Frontend/screen/profile.dart';
 import '../widget/build_Card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -195,52 +191,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: GNav(
-      //   tabs: [
-      //     GButton(
-      //       onPressed: () {
-      //         Navigator.pushNamed(context, Chatscreen.routeName);
-      //       },
-      //       icon: Icons.chat,
-      //       rippleColor: Colors.white10,
-      //       iconColor: Colors.white,
-      //       text: ' Chat',
-      //       textColor: Colors.white,
-      //       iconActiveColor: Colors.white,
-      //     ),
-      //     GButton(
-      //       onPressed: () {},
-      //       rippleColor: Colors.white10,
-      //       icon: Icons.home,
-      //       iconColor: Colors.white,
-      //       text: ' Home',
-      //       textColor: Colors.white,
-      //       iconActiveColor: Colors.white,
-      //     ),
-      //     GButton(
-      //       onPressed: () {
-      //         Navigator.pushNamed(context, ChatHistroyScreen.routeName);
-      //       },
-      //       rippleColor: Colors.white10,
-      //       icon: Icons.history,
-      //       iconColor: Colors.white,
-      //       text: ' History',
-      //       textColor: Colors.white,
-      //       iconActiveColor: Colors.white,
-      //     ),
-      //     GButton(
-      //       onPressed: () {
-      //         Navigator.pushNamed(context, myProfile.routeName);
-      //       },
-      //       rippleColor: Colors.white10,
-      //       icon: Icons.person,
-      //       iconColor: Colors.white,
-      //       text: ' Profile',
-      //       textColor: Colors.white,
-      //       iconActiveColor: Colors.white,
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

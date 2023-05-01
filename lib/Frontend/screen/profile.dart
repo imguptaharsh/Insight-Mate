@@ -1,4 +1,11 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:hackathon_gpt/Frontend/screen/logInScreen.dart';
+import 'package:hackathon_gpt/Frontend/screen/personal_info_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Backend/constants/error_handling.dart';
 // import 'package:google_nav_bar/google_nav_bar.dart';
 
 class myProfile extends StatefulWidget {
@@ -10,6 +17,23 @@ class myProfile extends StatefulWidget {
 }
 
 class _myProfileState extends State<myProfile> {
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      // GoogleSignIn().signOut();
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginPage.routeName,
+        (route) => false,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   Widget listTile(
       {required IconData icon, required String title, required onTab1}) {
     return Column(
@@ -150,11 +174,10 @@ class _myProfileState extends State<myProfile> {
                       listTile(
                           icon: Icons.person,
                           title: "Personal Info",
-                          onTab1: () {}),
-                      listTile(
-                          icon: Icons.security,
-                          title: "Security",
-                          onTab1: () {}),
+                          onTab1: () {
+                            Navigator.pushNamed(
+                                context, PersonalInfo.routeName);
+                          }),
                     ],
                   ),
                 ),
@@ -202,12 +225,10 @@ class _myProfileState extends State<myProfile> {
                           ),
                         ],
                       ),
-
                       listTile(
                           icon: Icons.help_outline,
                           title: "Help Center",
                           onTab1: () {}),
-
                       listTile(
                           icon: Icons.policy_outlined,
                           title: "Privacy policy",
@@ -306,9 +327,6 @@ class _myProfileState extends State<myProfile> {
                                                     ),
                                                   ),
                                                 ),
-                                                // style: ElevatedButton.styleFrom(
-                                                //   primary: _buttonColor,
-                                                // ),
                                                 child: const Text('Cancel'),
                                               ),
                                             ),
@@ -316,7 +334,9 @@ class _myProfileState extends State<myProfile> {
                                               width: 150,
                                               height: 50,
                                               child: ElevatedButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  logOut(context);
+                                                },
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStateProperty.all<
@@ -355,8 +375,6 @@ class _myProfileState extends State<myProfile> {
                               },
                             );
                           }),
-
-                      //  listTile(icon: Icons.shop, title: "My orders"),
                     ],
                   ),
                 )
@@ -365,40 +383,6 @@ class _myProfileState extends State<myProfile> {
           ],
         ),
       ),
-      // bottomNavigationBar: const GNav(tabs: [
-      //   GButton(
-      //     icon: Icons.chat,
-      //     rippleColor: Colors.white10,
-      //     iconColor: Colors.white,
-      //     text: ' Chat',
-      //     textColor: Colors.white,
-      //     iconActiveColor: Colors.white,
-      //   ),
-      //   GButton(
-      //     rippleColor: Colors.white10,
-      //     icon: Icons.home,
-      //     iconColor: Colors.white,
-      //     text: ' Home',
-      //     textColor: Colors.white,
-      //     iconActiveColor: Colors.white,
-      //   ),
-      //   GButton(
-      //     rippleColor: Colors.white10,
-      //     icon: Icons.history,
-      //     iconColor: Colors.white,
-      //     text: ' History',
-      //     textColor: Colors.white,
-      //     iconActiveColor: Colors.white,
-      //   ),
-      //   GButton(
-      //     rippleColor: Colors.white10,
-      //     icon: Icons.person,
-      //     iconColor: Colors.white,
-      //     text: ' Profile',
-      //     textColor: Colors.white,
-      //     iconActiveColor: Colors.white,
-      //   ),
-      // ]),
     );
   }
 }

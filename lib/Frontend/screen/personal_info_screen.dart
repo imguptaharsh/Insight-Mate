@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_gpt/Backend/auth/auth_services.dart';
 import '../widget/bottom_sheet.dart';
 
 class PersonalInfo extends StatefulWidget {
@@ -11,17 +12,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _genderController = TextEditingController();
-  final _dobController = TextEditingController();
 
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
-
+    final AuthService authService = AuthService();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -183,128 +179,6 @@ class _PersonalInfoState extends State<PersonalInfo> {
                         ),
                       ),
                       const SizedBox(height: 16.0),
-                      const Text(
-                        'Phone',
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      TextFormField(
-                        cursorColor: const Color.fromRGBO(0, 166, 126, 1),
-                        cursorHeight: 25,
-                        cursorRadius: const Radius.circular(30),
-                        cursorWidth: 3,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Gotham',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        controller: _phoneController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your phone number';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(2, 190, 146, 0.382)),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(0, 166, 126, 100)),
-                          ),
-                          hintStyle: TextStyle(color: Colors.white54),
-                          hintText: '   Enter your phone number',
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      const Text(
-                        'Gender',
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      TextFormField(
-                        cursorColor: const Color.fromRGBO(0, 166, 126, 1),
-                        cursorHeight: 25,
-                        cursorRadius: const Radius.circular(30),
-                        cursorWidth: 3,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Gotham',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        controller: _genderController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your Gender';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(2, 190, 146, 0.382)),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(0, 166, 126, 100)),
-                          ),
-                          hintStyle: TextStyle(color: Colors.white54),
-                          hintText: '   Enter your Gender',
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      const Text(
-                        'Date of Birth',
-                        style: TextStyle(
-                            fontFamily: 'Gotham',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      TextFormField(
-                        cursorColor: const Color.fromRGBO(0, 166, 126, 1),
-                        cursorHeight: 25,
-                        cursorRadius: const Radius.circular(30),
-                        cursorWidth: 3,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Gotham',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        controller: _dobController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your Date of Birth';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.datetime,
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(2, 190, 146, 0.382)),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(0, 166, 126, 100)),
-                          ),
-                          hintStyle: TextStyle(color: Colors.white54),
-                          hintText: '   Enter your DOB',
-                        ),
-                      ),
                       const SizedBox(
                         height: 50,
                       ),
@@ -332,6 +206,11 @@ class _PersonalInfoState extends State<PersonalInfo> {
                                 setState(() {
                                   _isLoading = true;
                                 });
+                                authService.changeCredentials(
+                                  email: _emailController.text,
+                                  name: _nameController.text,
+                                  context: context,
+                                );
                                 // Simulating update with delay
                                 Future.delayed(
                                     const Duration(milliseconds: 100), () {

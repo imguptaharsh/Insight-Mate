@@ -3,7 +3,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:hackathon_gpt/Frontend/screen/chatscreen.dart';
 import 'package:hackathon_gpt/Frontend/screen/profile.dart';
 
-import 'chat.dart';
 import 'chat_history_screen.dart';
 import 'homescreen.dart';
 
