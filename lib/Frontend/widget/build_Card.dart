@@ -65,7 +65,7 @@ class buildCard extends StatelessWidget {
                         textBody,
                         style: const TextStyle(
                             letterSpacing: 0.2,
-                            wordSpacing: 0.6,
+                            wordSpacing: 0.8,
                             fontFamily: 'Gotham',
                             color: Color.fromARGB(152, 228, 220, 220),
                             fontWeight: FontWeight.w400,
